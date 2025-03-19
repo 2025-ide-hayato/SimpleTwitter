@@ -40,7 +40,7 @@ public class UserService {
 
 		Connection connection = null;
 		try {
-			// パスワード暗号化
+			//パスワード暗号化
 			String encPassword = CipherUtil.encrypt(user.getPassword());
 			user.setPassword(encPassword);
 
@@ -71,7 +71,7 @@ public class UserService {
 
 		Connection connection = null;
 		try {
-			// パスワード暗号化
+			//パスワード暗号化
 			String encPassword = CipherUtil.encrypt(password);
 
 			connection = getConnection();
@@ -94,7 +94,8 @@ public class UserService {
 		}
 	}
 
-	public User select(int userId) {//ユーザ設定変更
+	//ユーザ設定変更
+	public User select(int userId) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -132,9 +133,10 @@ public class UserService {
 
 		Connection connection = null;
 		try {
-			// パスワード暗号化
-			//        	実践課題その①暗号化のエスケープ
-			if (!StringUtils.isEmpty(user.getPassword())) {
+
+			//実践課題その①暗号化のエスケープ
+			if (!StringUtils.isBlank(user.getPassword())) {
+				// パスワード暗号化
 				String encPassword = CipherUtil.encrypt(user.getPassword());
 				user.setPassword(encPassword);
 			}

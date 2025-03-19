@@ -147,7 +147,8 @@ public class UserDao {
 		}
 	}
 
-	public User select(Connection connection, int id) {//ユーザ設定変更
+	//ユーザ設定変更
+	public User select(Connection connection, int id) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -193,13 +194,12 @@ public class UserDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 
-
 			sql.append("UPDATE users SET ");
 			sql.append("    account = ?, ");
 			sql.append("    name = ?, ");
 			sql.append("    email = ?, ");
-//	    		実践課題①クエリの分岐
-			if (!StringUtils.isEmpty(user.getPassword())) {
+			//実践課題①クエリの分岐
+			if (!StringUtils.isBlank(user.getPassword())) {
 				sql.append("    password = ?, ");
 			}
 			sql.append("    description = ?, ");
@@ -211,8 +211,8 @@ public class UserDao {
 			ps.setString(1, user.getAccount());
 			ps.setString(2, user.getName());
 			ps.setString(3, user.getEmail());
-//	    		実践課題①クエリの分岐
-			if (!StringUtils.isEmpty(user.getPassword())) {
+			//実践課題①クエリの分岐
+			if (!StringUtils.isBlank(user.getPassword())) {
 				ps.setString(4, user.getPassword());
 				ps.setString(5, user.getDescription());
 				ps.setInt(6, user.getId());
