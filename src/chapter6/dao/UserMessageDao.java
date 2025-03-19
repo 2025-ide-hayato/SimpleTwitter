@@ -54,12 +54,15 @@ public class UserMessageDao {
 			sql.append("ON messages.user_id = users.id ");
 			//実践課題⓶
 			if (selectedId != 0) {
-				sql.append("WHERE messages.user_id =" + selectedId + " ");
+				sql.append("WHERE messages.user_id = ? ");
 			}
 			sql.append("ORDER BY created_date DESC limit " + num);
 
 			ps = connection.prepareStatement(sql.toString());
-
+			//実践課題⓶
+			if (selectedId != 0) {
+				ps.setInt(1, selectedId);
+			}
 			ResultSet rs = ps.executeQuery();
 
 			List<UserMessage> messages = toUserMessages(rs);
