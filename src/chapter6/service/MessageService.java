@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang.StringUtils;
+
 import chapter6.beans.Message;
 import chapter6.beans.UserMessage;
 import chapter6.dao.MessageDao;
@@ -34,7 +36,7 @@ public class MessageService {
 
     public void insert(Message message) {
 
-	  log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
+	  log.info(new Object(){}.getClass().getEnclosingClass().getName() +
         " : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
         Connection connection = null;
@@ -54,9 +56,9 @@ public class MessageService {
             close(connection);
         }
     }
-    public List<UserMessage> select() {
+    public List<UserMessage> select(String userId) {
 
-  	  log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
+  	  log.info(new Object(){}.getClass().getEnclosingClass().getName() +
           " : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
           final int LIMIT_NUM = 1000;
@@ -64,7 +66,12 @@ public class MessageService {
           Connection connection = null;
           try {
               connection = getConnection();
-              List<UserMessage> messages = new UserMessageDao().select(connection, LIMIT_NUM);
+              //実践課題⓶
+              int selectedId = 0;
+              if (!StringUtils.isBlank(userId)){
+                selectedId = Integer.parseInt(userId);
+              }
+              List<UserMessage> messages = new UserMessageDao().select(connection, LIMIT_NUM, selectedId);
               commit(connection);
 
               return messages;

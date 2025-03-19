@@ -39,7 +39,7 @@ public class TopServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
 
-	  log.info(new Object(){}.getClass().getEnclosingClass().getName() + 
+	  log.info(new Object(){}.getClass().getEnclosingClass().getName() +
         " : " + new Object(){}.getClass().getEnclosingMethod().getName());
 
         boolean isShowMessageForm = false;
@@ -47,8 +47,9 @@ public class TopServlet extends HttpServlet {
         if (user != null) {
             isShowMessageForm = true;
         }
-
-        List<UserMessage> messages = new MessageService().select();
+        //実践課題⓶
+        String userId = request.getParameter("userId");
+        List<UserMessage> messages = new MessageService().select(userId);
 
         request.setAttribute("messages", messages);
         request.setAttribute("isShowMessageForm", isShowMessageForm);
