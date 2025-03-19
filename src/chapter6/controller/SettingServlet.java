@@ -121,7 +121,7 @@ public class SettingServlet extends HttpServlet {
 		User sameUser = new UserService().select(account);
 
 		//実践課題➂
-		if (sameUser != null && !account.equals(loginUser.getAccount())) {
+		if (sameUser != null && sameUser.getId() != loginUser.getId()) {
 			errorMessages.add("既に存在しているアカウント名です。");
 		}
 
