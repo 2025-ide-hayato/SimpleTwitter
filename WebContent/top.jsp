@@ -71,13 +71,30 @@
 									value="${message.account}" /></a></span> <span class="name"><c:out
 								value="${message.name}" /></span>
 					</div>
+
 					<div class="text">
-						<c:out value="${message.text}" />
+						<pre><c:out value="${message.text}" /></pre>
 					</div>
+
 					<div class="date">
 						<fmt:formatDate value="${message.createdDate}"
 							pattern="yyyy/MM/dd HH:mm:ss" />
 					</div>
+					<%--つぶやきの削除 --%>
+					<div class="edit">
+						<c:if test="${message.userId == loginUser.id}">
+							<form action="edit" method="get">
+								<input name="message_id" type="hidden" value="${message.id}">
+								<input type="submit" value="編集" />
+							</form>
+
+							<form action="deleteMessage" method="post">
+								<input name="message_id" type="hidden" value="${message.id}">
+								<input type="submit" value="削除" />
+							</form>
+						</c:if>
+					</div>
+
 				</div>
 			</c:forEach>
 		</div>
