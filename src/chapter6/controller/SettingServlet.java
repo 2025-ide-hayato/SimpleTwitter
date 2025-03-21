@@ -68,9 +68,7 @@ public class SettingServlet extends HttpServlet {
 		List<String> errorMessages = new ArrayList<String>();
 
 		User user = getUser(request);
-		//実践課題➂
-		User loginUser = (User) session.getAttribute("loginUser");
-		if (isValid(user, loginUser, errorMessages)) {
+		if (isValid(user, errorMessages)) {
 			try {
 				new UserService().update(user);
 			} catch (NoRowsUpdatedRuntimeException e) {
@@ -107,7 +105,7 @@ public class SettingServlet extends HttpServlet {
 		return user;
 	}
 
-	private boolean isValid(User user, User loginUser, List<String> errorMessages) {
+	private boolean isValid(User user, List<String> errorMessages) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -121,7 +119,7 @@ public class SettingServlet extends HttpServlet {
 		User sameUser = new UserService().select(account);
 
 		//実践課題➂
-		if (sameUser != null && sameUser.getId() != loginUser.getId()) {
+		if ((sameUser != null) && (sameUser.getId() != user.getId())) {
 			errorMessages.add("既に存在しているアカウント名です。");
 		}
 
