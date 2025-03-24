@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import chapter6.beans.Message;
-import chapter6.exception.NoRowsUpdatedRuntimeException;
 import chapter6.logging.InitApplication;
 import chapter6.service.MessageService;
 
@@ -48,17 +47,17 @@ public class EditServlet extends HttpServlet {
 
 		List<String> errorMessages = new ArrayList<String>();
 		String messageId = request.getParameter("message_id");
+		Message targetMessage = null;
 
-		try {
+		if (messageId.matches("^[0-9]*$")) {
 			Integer id = Integer.parseInt(messageId);
-			Message targetMessage = new MessageService().select(id);
-			if (targetMessage == null) {
-				errorMessages.add("不正なパラメータが入力されました");
-			} else {
-				request.setAttribute("message", targetMessage);
-			}
-		} catch (NumberFormatException e) {
+			targetMessage = new MessageService().select(id);
+		}
+
+		if (targetMessage == null) {
 			errorMessages.add("不正なパラメータが入力されました");
+		} else {
+			request.setAttribute("message", targetMessage);
 		}
 
 		if (errorMessages.size() != 0) {
@@ -85,12 +84,7 @@ public class EditServlet extends HttpServlet {
 		message.setText(request.getParameter("text"));
 
 		if (isValid(message.getText(), errorMessages)) {
-			try {
-				new MessageService().update(message);
-			} catch (NoRowsUpdatedRuntimeException e) {
-				log.warning("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
-				errorMessages.add("他の人によって更新されています。最新のデータを表示しました。データを確認してください。");
-			}
+			new MessageService().update(message);
 		}
 
 		if (errorMessages.size() != 0) {

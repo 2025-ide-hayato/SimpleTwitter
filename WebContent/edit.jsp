@@ -56,12 +56,10 @@
 				<input name="message_id" type="hidden" value="${message.id}">
 				つぶやき<br>
 				<textarea name="text" cols="100" rows="5" class="tweet-box">${message.text}</textarea>
-				<br /> <input type="submit" value="更新">（140文字まで）<br> <a
-					href="./">戻る</a>
+				<br /> <input type="submit" value="更新">（140文字まで）<br>
+				<a href="./">戻る</a>
 			</form>
 		</div>
-
-
 
 		<div class="copyright">Copyright(c)Ide Hayato</div>
 	</div>
