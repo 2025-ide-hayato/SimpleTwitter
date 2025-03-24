@@ -159,7 +159,7 @@ public class MessageDao {
 		}
 	}
 
-	public void update(Connection connection, Integer id, String text) {
+	public void update(Connection connection, Message message) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -176,8 +176,8 @@ public class MessageDao {
 
 			ps = connection.prepareStatement(sql.toString());
 
-			ps.setString(1, text);
-			ps.setInt(2, id);
+			ps.setString(1, message.getText());
+			ps.setInt(2, message.getId());
 
 			int count = ps.executeUpdate();
 			if (count == 0) {

@@ -49,7 +49,7 @@ public class EditServlet extends HttpServlet {
 		String messageId = request.getParameter("message_id");
 		Message targetMessage = null;
 
-		if (messageId.matches("^[0-9]*$")) {
+		if (messageId.matches("^[0-9]+$") && (messageId != null)) {
 			Integer id = Integer.parseInt(messageId);
 			targetMessage = new MessageService().select(id);
 		}

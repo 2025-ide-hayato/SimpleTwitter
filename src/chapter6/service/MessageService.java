@@ -161,9 +161,7 @@ public class MessageService {
 		try {
 			connection = getConnection();
 
-			int id = message.getId();
-			String text = message.getText();
-			new MessageDao().update(connection, id, text);
+			new MessageDao().update(connection, message);
 
 			commit(connection);
 
