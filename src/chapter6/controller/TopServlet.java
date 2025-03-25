@@ -51,12 +51,17 @@ public class TopServlet extends HttpServlet {
 		if (user != null) {
 			isShowMessageForm = true;
 		}
+		//つぶやきの絞り込み
+		String start = request.getParameter("start");
+		String end = request.getParameter("end");
 		//実践課題⓶
 		String userId = request.getParameter("userId");
-		List<UserMessage> messages = new MessageService().select(userId);
-		//つぶやきの返信
+		List<UserMessage> messages = new MessageService().select(userId, start, end);
+		//つぶやきの返信（表示）
 		List<UserComment> comments = new CommentService().select();
 
+		request.setAttribute("start", start);
+		request.setAttribute("end", end);
 		request.setAttribute("messages", messages);
 		request.setAttribute("comments", comments);
 		request.setAttribute("isShowMessageForm", isShowMessageForm);

@@ -23,6 +23,16 @@
 				<a href="logout">ログアウト</a>
 			</c:if>
 		</div>
+		<%-- つぶやきの絞り込み --%>
+		<div class="date-filter">
+			<form action="./" method="get">
+					日付
+					<input name="start" type="date" value="${start}"/>
+					～
+					<input name="end" type="date" value="${end}"/>
+					<input type="submit" value="絞込">
+			</form>
+		</div>
 		<c:if test="${ not empty loginUser }">
 			<div class="profile">
 				<div class="name">
@@ -104,16 +114,13 @@
 									<span class="account"><c:out value="${comment.account}" /></span>
 									<span class="name"><c:out value="${comment.name}" /></span>
 								</div>
-
 								<div class="test">
 									<pre><c:out value="${comment.text}" /></pre>
 								</div>
-
 								<div class="date">
 									<fmt:formatDate value="${comment.createdDate}"
 										pattern="yyyy/MM/dd HH:mm:ss" />
 								</div>
-
 							</div>
 						</c:if>
 					</c:forEach>
@@ -123,7 +130,7 @@
 							<form action="comment" method="post">
 								<input name="message_id" type="hidden" value="${message.id}">
 								返信<br />
-								<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
+								<textarea name="text" cols="100" rows="5" class="reply-box"></textarea>
 								<br /> <input type="submit" value="返信">（140文字まで）
 							</form>
 						</c:if>

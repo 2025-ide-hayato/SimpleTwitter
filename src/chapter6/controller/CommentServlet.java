@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,7 +21,7 @@ import chapter6.service.CommentService;
 
 @WebServlet(urlPatterns = { "/comment" })
 
-public class CommentServlet {
+public class CommentServlet extends HttpServlet {
 	/**
 	* ロガーインスタンスの生成
 	*/
@@ -34,7 +35,7 @@ public class CommentServlet {
 	public CommentServlet() {
 		InitApplication application = InitApplication.getInstance();
 		application.init();
-
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +60,7 @@ public class CommentServlet {
 		Comment comment = new Comment();
 		comment.setText(text);
 		comment.setMessageId(Integer.parseInt(messageId));
-		
+
 		User user = (User) session.getAttribute("loginUser");
 		comment.setUserId(user.getId());
 

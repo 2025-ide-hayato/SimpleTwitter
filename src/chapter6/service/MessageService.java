@@ -4,6 +4,7 @@ import static chapter6.utils.CloseableUtil.*;
 import static chapter6.utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -60,7 +61,7 @@ public class MessageService {
 		}
 	}
 
-	public List<UserMessage> select(String userId) {
+	public List<UserMessage> select(String userId, String start, String end) {
 
 		log.info(new Object() {
 		}.getClass().getEnclosingClass().getName() +
@@ -77,7 +78,20 @@ public class MessageService {
 			if (!StringUtils.isBlank(userId)) {
 				selectedId = Integer.parseInt(userId);
 			}
-			List<UserMessage> messages = new UserMessageDao().select(connection, LIMIT_NUM, selectedId);
+			//つぶやきの絞り込み
+			if ((start != null) && (start != "")) {
+				start = start + " 00:00:00";
+			} else {
+				start = "2020/01/01 00:00:00";
+			}
+
+			if ((end != null) && (end != "")) {
+				end = end + " 23:59:59";
+			} else {
+				end = new Date().toString();
+			}
+
+			List<UserMessage> messages = new UserMessageDao().select(connection, LIMIT_NUM, selectedId, start, end);
 			commit(connection);
 
 			return messages;
