@@ -26,11 +26,11 @@
 		<%-- つぶやきの絞り込み --%>
 		<div class="date-filter">
 			<form action="./" method="get">
-					日付
-					<input name="start" type="date" value="${start}"/>
-					～
-					<input name="end" type="date" value="${end}"/>
-					<input type="submit" value="絞込">
+				日付
+				<input name="start" type="date" value="${start}"/>
+				～
+				<input name="end" type="date" value="${end}"/>
+				<input type="submit" value="絞込">
 			</form>
 		</div>
 		<c:if test="${ not empty loginUser }">

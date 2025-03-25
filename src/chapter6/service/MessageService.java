@@ -4,6 +4,7 @@ import static chapter6.utils.CloseableUtil.*;
 import static chapter6.utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -79,16 +80,18 @@ public class MessageService {
 				selectedId = Integer.parseInt(userId);
 			}
 			//つぶやきの絞り込み
-			if ((start != null) && (start != "")) {
-				start = start + " 00:00:00";
+			if (!StringUtils.isBlank(start)) {
+				start += " 00:00:00";
 			} else {
 				start = "2020/01/01 00:00:00";
 			}
 
-			if ((end != null) && (end != "")) {
-				end = end + " 23:59:59";
+			if (!StringUtils.isBlank(end)) {
+				end += " 23:59:59";
 			} else {
-				end = new Date().toString();
+				Date nowDate = new Date();
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				end = simpleDateFormat.format(nowDate);
 			}
 
 			List<UserMessage> messages = new UserMessageDao().select(connection, LIMIT_NUM, selectedId, start, end);
