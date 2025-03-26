@@ -6,9 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/style.css" rel="stylesheet" type="text/css">
-<title>簡易Twitter</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="./css/style.css" rel="stylesheet" type="text/css">
+	<%--JSファイル読み込み --%>
+	<script src="./js/vendor/jquery-3.7.1.min.js"></script>
+	<script src="./js/vendor/jquery-3.7.1.js"></script>
+	<script src="./js/main.js"></script>
+	<title>簡易Twitter</title>
 </head>
 <body>
 	<div class="main-contents">
@@ -27,10 +31,10 @@
 		<div class="date-filter">
 			<form action="./" method="get">
 				日付
-				<input name="start" type="date" value="${start}"/>
+				<input name="start" type="date" value="${start}" id="start"/>
 				～
-				<input name="end" type="date" value="${end}"/>
-				<input type="submit" value="絞込">
+				<input name="end" type="date" value="${end}" id="end"/>
+				<input type="submit" value="絞込" id="filter"/>
 			</form>
 		</div>
 		<c:if test="${ not empty loginUser }">
@@ -99,31 +103,33 @@
 							</form>
 
 							<form action="deleteMessage" method="post">
-								<input name="message_id" type="hidden" value="${message.id}">
-								<input type="submit" value="削除" />
+								<input name="message_id" type="hidden" value="${message.id}" >
+								<input type="submit" value="削除" id="delete"/>
 							</form>
 						</c:if>
 					</div>
 				</div>
 				<%-- つぶやきの返信 --%>
 				<div class="comments">
-					<c:forEach items="${comments}" var="comment">
-						<c:if test="${message.id == comment.messageId}">
-							<div class="comment">
-								<div class="account-name">
-									<span class="account"><c:out value="${comment.account}" /></span>
-									<span class="name"><c:out value="${comment.name}" /></span>
+					<div class="eachComment">
+						<c:forEach items="${comments}" var="comment">
+							<c:if test="${message.id == comment.messageId}">
+								<div class="comment">
+									<div class="account-name">
+										<span class="account"><c:out value="${comment.account}" /></span>
+										<span class="name"><c:out value="${comment.name}" /></span>
+									</div>
+									<div class="test">
+										<pre><c:out value="${comment.text}" /></pre>
+									</div>
+									<div class="date">
+										<fmt:formatDate value="${comment.createdDate}"
+											pattern="yyyy/MM/dd HH:mm:ss" />
+									</div>
 								</div>
-								<div class="test">
-									<pre><c:out value="${comment.text}" /></pre>
-								</div>
-								<div class="date">
-									<fmt:formatDate value="${comment.createdDate}"
-										pattern="yyyy/MM/dd HH:mm:ss" />
-								</div>
-							</div>
-						</c:if>
-					</c:forEach>
+							</c:if>
+						</c:forEach>
+					</div>
 
 					<div class="form-area">
 						<c:if test="${ isShowMessageForm }">

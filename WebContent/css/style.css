@@ -102,7 +102,7 @@ a.profile .account {
 	font: small-caption;
 }
 
-.message .date/*, .comment .date*/ {
+.message .date, .comment .date {
 	font-weight: lighter;
 	color: gray;
 	font: small-caption;
@@ -125,7 +125,7 @@ label {
 	color: red;
 }
 
-/*
+
 .comment {
 	padding-left: 20px;
 }
@@ -137,4 +137,3 @@ label {
 .comments .form-area{
 	padding-left: 20px;
 }
-*/
