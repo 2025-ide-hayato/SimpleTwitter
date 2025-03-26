@@ -37,7 +37,7 @@ public class LoginFilter implements Filter {
 			HttpSession session = httpRequest.getSession();
 			session.setAttribute("errorMessages", errorMessages);
 
-			httpResponse.sendRedirect("login");
+			httpResponse.sendRedirect("./login");
 		}
 	}
 
