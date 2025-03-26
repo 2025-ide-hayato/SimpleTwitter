@@ -111,6 +111,9 @@
 				</div>
 				<%-- つぶやきの返信 --%>
 				<div class="comments">
+					<br /><button type="button" class="toggle">
+					返信を表示する
+					</button>
 					<div class="eachComment">
 						<c:forEach items="${comments}" var="comment">
 							<c:if test="${message.id == comment.messageId}">

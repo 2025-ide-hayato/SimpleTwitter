@@ -137,3 +137,15 @@ label {
 .comments .form-area{
 	padding-left: 20px;
 }
+
+.eachComment {
+	display:none;
+}
+
+.edit {
+    display: flex;
+    flex-direction: row;
+}
+
+
+

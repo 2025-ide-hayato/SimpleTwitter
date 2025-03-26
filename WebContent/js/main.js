@@ -10,7 +10,6 @@ $(function(){
 		return false;
 	});
 
-	$(".comment .date").css('color', 'grey');
 
 	$("#filter").on('click', function(){
 		const start = document.getElementById('start').value;
@@ -29,5 +28,9 @@ $(function(){
 		return true
 	});
 
+	$(".toggle").click(function(){
+		$(this).next().toggle();
+	});
 
 });
+
