@@ -68,7 +68,8 @@
 		<div class="form-area">
 			<c:if test="${ isShowMessageForm }">
 				<form action="message" method="post">
-					いま、どうしてる？<br />
+					いま、どうしてる？
+					<p id="charaCount"></p>
 					<textarea name="text" cols="100" rows="5" class="tweet-box"></textarea>
 					<br /> <input type="submit" value="つぶやく">（140文字まで）
 				</form>

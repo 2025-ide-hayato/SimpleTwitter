@@ -108,6 +108,10 @@ a.profile .account {
 	font: small-caption;
 }
 
+.message {
+	padding: 5px;
+}
+
 .copyright {
 	width: 250px;
 	margin: 0 auto;
@@ -125,7 +129,6 @@ label {
 	color: red;
 }
 
-
 .comment {
 	padding-left: 20px;
 }
@@ -134,18 +137,20 @@ label {
 	width: 580px;
 	height: 56px;
 }
-.comments .form-area{
+
+.comments > .form-area {
 	padding-left: 20px;
 }
 
 .eachComment {
-	display:none;
+	display: none;
 }
 
 .edit {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
-
-
+.text {
+	padding-left: 10px;
+}

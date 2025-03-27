@@ -6,9 +6,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>${loginUser.account}の設定</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css">
-    </head>
+		<title>${loginUser.account}の設定</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<script src="./js/vendor/jquery-3.7.1.min.js"></script>
+		<script src="./js/vendor/jquery-3.7.1.js"></script>
+		<script src="./js/setting.js"></script>
+	</head>
     <body>
         <div class="main-contents">
 
