@@ -15,8 +15,14 @@
 	<title>簡易Twitter</title>
 </head>
 <body>
+	<div class="help" id="help">
+		ヘルプ
+		<br /><textarea name="help-box" cols="30" rows="3" class="help-box" placeholder="お困りごとを入力"></textarea>
+	</div>
 	<div class="main-contents">
+
 		<div class="header">
+			<span id="size-info"></span>
 			<c:if test="${ empty loginUser }">
 				<a href="login">ログイン</a>
 				<a href="signup">登録する</a>

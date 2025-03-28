@@ -2,7 +2,7 @@
  *
  */
 $(function() {
-
+	//削除前警告
 	$("#delete").on('click', function() {
 		if (confirm("投稿を削除してもよろしいですか？")) {
 			return true;
@@ -44,14 +44,16 @@ $(function() {
 
 	});
 
-	$(".message").hover(function(){
-		if ( $(this).css('background-color') == 'rgb(102, 153, 204)'){
-			$(this).css('background-color', 'transparent');
-		} else {
-			$(this).css('background-color', 'rgb(102, 153, 204)');
-		}
+	//選択投稿の色変え
+	$(".message").mouseover(function(){
+		$(this).css('background-color', 'rgb(102, 153, 204)');
 	});
 
+	$(".message").mouseleave(function(){
+		$(this).css('background-color', 'transparent');
+	});
+
+	//投稿文字数の表示
 	$(".tweet-box").keyup(function(){
 		const cnt = $(this).val().length;
 		let chrCnt;
@@ -67,4 +69,55 @@ $(function() {
 			$("#charaCount").css('color','black');
 		}
 	});
+
+	//risizeをコンソール表示
+	let updateSize = () => {
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+		document.getElementById('size-info').textContent = `<ウィンドウサイズ：${width}x${height}>`;
+	};
+
+	window.addEventListener('resize', updateSize);
+	updateSize();
+
+	//scroll時に背景色変更
+	$(window).scroll(()=>{
+		const y = window.scrollY;
+		const element = document.documentElement;
+		const bottom = element.scrollHeight - element.clientHeight;
+		if (y >= (bottom / 2)){
+			document.body.style.backgroundColor = '#FFFF99';
+		} else {
+			document.body.style.backgroundColor = '#99FFFF';
+		}
+
+	});
+
+	//ヘルプ欄
+	const box = document.getElementById('help');
+	let isDragging = false;
+	let offsetX, offsetY;
+
+	box.addEventListener("mousedown", (event) => {
+		isDragging = true;
+		offsetX = event.clientX - box.offsetLeft;
+		offsetY = event.clientY - box.offsetTop;
+	});
+
+	document.addEventListener("mousemove", (event) => {
+		if (isDragging) {
+			box.style.left = (event.clientX - offsetX) + "px";
+			box.style.top =  (event.clientY - offsetY) + "px";
+		}
+	});
+
+	document.addEventListener("mouseup", (event) => {
+		if (isDragging) {
+			isDragging = false;
+			console.log("ドラッグ終了");
+		}
+	});
+
+
+
 });

@@ -7,6 +7,10 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <script src="./js/vendor/jquery-3.7.1.min.js"></script>
+	<script src="./js/vendor/jquery-3.7.1.js"></script>
+	<script src="./js/signup.js"></script>
+	</head>
     <title>ユーザー登録</title>
     </head>
     <body>

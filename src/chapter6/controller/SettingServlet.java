@@ -67,6 +67,14 @@ public class SettingServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		List<String> errorMessages = new ArrayList<String>();
 
+        try {
+            System.out.println("スレッドが停止します");
+            Thread.sleep(3000);
+            System.out.println("スレッドが再開します");
+        } catch (InterruptedException e) {
+            System.out.println("スレッドが中断されました");
+        }
+
 		User user = getUser(request);
 		if (isValid(user, errorMessages)) {
 			try {
@@ -79,9 +87,11 @@ public class SettingServlet extends HttpServlet {
 
 		if (errorMessages.size() != 0) {
 			request.setAttribute("errorMessages", errorMessages);
+			System.out.println(errorMessages);
 			request.setAttribute("user", user);
+			session.setAttribute("errorMessages", errorMessages);
 			request.getRequestDispatcher("setting.jsp").forward(request, response);
-			return;
+			return ;
 		}
 
 		session.setAttribute("loginUser", user);
